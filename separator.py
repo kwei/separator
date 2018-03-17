@@ -3,11 +3,35 @@ import os
 import datetime
 import time
 from colorama import Fore, Back, Style
+import tkinter as tk
 
 os.system('clear')
 
+oldfilename = input("Type the file name with path you want to separate.\n> ")
+newfilename = input("Type the new file name with path you want to save.\n> ")
+'''
+mainWin = tk.Tk()
+mainWin.title("CSV Separator")
+mainWin.geometry('200x100')
+
+filenameLabel = tk.Label(mainWin,text="Type the file name with path you want to separate.")
+filenameLabel.pack()
+filenameEntry = tk.Entry(mainWin,text="input")
+filenameEntry.pack()
+
+newfilenameLabel = tk.Label(mainWin,text="Type the new file name with path you want to save.")
+newfilenameLabel.pack()
+newfilenameEntry = tk.Entry(mainWin,text="input")
+newfilenameEntry.pack()
+'''
 station = []
 head = []
+'''
+oldfilename = filenameEntry.get()
+print("[ " + Fore.GREEN + "Info" + Fore.RESET + " ] " + "old file name : " + oldfilename)
+newfilename = newfilenameEntry.get()
+print("[ " + Fore.GREEN + "Info" + Fore.RESET + " ] " + "new file name : " + newfilename)
+'''
 
 class Dataset:
 	def __init__(self):
@@ -25,7 +49,7 @@ class Dataset:
 		return self.__head
 
 begin = datetime.datetime.now()
-with open('11.csv') as csvfile:
+with open(oldfilename) as csvfile:
 	csvfile.seek(0)
 	readcsv = csv.reader(csvfile, delimiter=',')
 	iterator = 1
@@ -58,7 +82,7 @@ with open('11.csv') as csvfile:
 	print("[ " + Fore.GREEN + "Info" + Fore.RESET + " ] " + "Total data's amounts is " + str(iterator))
 	csvfile.close()
 
-with open('new_11.csv', 'w') as csvfile:
+with open(newfilename, 'w') as csvfile:
 	csvfile.seek(0)
 	writecsv = csv.writer(csvfile, delimiter=',')
 	print("[ " + Fore.GREEN + "Info" + Fore.RESET + " ] " + "Start to rewrite the datas!")
@@ -74,3 +98,5 @@ with open('new_11.csv', 'w') as csvfile:
 end = datetime.datetime.now()
 total_time_cost = end.second - begin.second
 print("[ " + Fore.GREEN + "Info" + Fore.RESET + " ] " + "Total time cost = " + str(total_time_cost) + " s")
+
+#mainWin.mainloop()
